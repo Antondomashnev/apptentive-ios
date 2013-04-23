@@ -54,6 +54,28 @@ NSString *const ATSurveySentSurveysPreferenceKey = @"ATSurveySentSurveysPreferen
 	[currentSurvey release], currentSurvey = nil;
 }
 
+- (void)presentSurveyControllerFromViewController:(UIViewController *)viewController withCustomCloseButton:(UIView *)closeButtonView{
+	if (currentSurvey == nil) {
+		return;
+	}
+	ATSurveyViewController *vc = [[ATSurveyViewController alloc] initWithSurvey:currentSurvey];
+	vc.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView: closeButtonView] autorelease];
+	UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+	
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+		[viewController presentModalViewController:nc animated:YES];
+	} else {
+		nc.modalPresentationStyle = UIModalPresentationFormSheet;
+		[viewController presentModalViewController:nc animated:YES];
+	}
+	[nc release];
+	[vc release];
+	
+	NSDictionary *metricsInfo = [[NSDictionary alloc] initWithObjectsAndKeys:currentSurvey.identifier, ATSurveyMetricsSurveyIDKey, [NSNumber numberWithInt:ATSurveyWindowTypeSurvey], ATSurveyWindowTypeKey, nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:ATSurveyDidShowWindowNotification object:nil userInfo:metricsInfo];
+	[metricsInfo release], metricsInfo = nil;
+}
+
 - (void)presentSurveyControllerFromViewController:(UIViewController *)viewController {
 	if (currentSurvey == nil) {
 		return;

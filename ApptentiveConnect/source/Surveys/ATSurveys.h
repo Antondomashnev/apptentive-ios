@@ -26,5 +26,6 @@ The userInfo dictionary will have a key named ATSurveyIDKey, with a value of the
  * Presents a survey controller in the window of the given view controller.
  */
 + (void)presentSurveyControllerFromViewController:(UIViewController *)viewController;
++ (void)presentSurveyControllerFromViewController:(UIViewController *)viewController withCustomCloseButton:(UIButton *)closeButton;
 #endif
 @end

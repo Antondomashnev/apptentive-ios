@@ -44,4 +44,10 @@ NSString *const ATSurveyIDKey = @"ATSurveyIDKey";
 	ATSurveysBackend *backend = [ATSurveysBackend sharedBackend];
 	[backend presentSurveyControllerFromViewController:viewController];
 }
+
++ (void)presentSurveyControllerFromViewController:(UIViewController *)viewController withCustomCloseButton:(UIButton *)closeButton{
+	ATSurveysBackend *backend = [ATSurveysBackend sharedBackend];
+	[backend presentSurveyControllerFromViewController:viewController withCustomCloseButton:closeButton];
+}
+
 @end

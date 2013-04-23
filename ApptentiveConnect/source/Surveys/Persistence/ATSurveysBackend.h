@@ -19,6 +19,7 @@
 - (ATSurvey *)currentSurvey;
 - (void)resetSurvey;
 - (void)presentSurveyControllerFromViewController:(UIViewController *)viewController;
+- (void)presentSurveyControllerFromViewController:(UIViewController *)viewController withCustomCloseButton:(UIView *)closeButtonView;
 - (void)setDidSendSurvey:(ATSurvey *)survey;
 @end
 
